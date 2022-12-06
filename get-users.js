@@ -2,7 +2,9 @@
 
 const fs = require('fs');
 
-function getUsers() {
+
+// takes user info from user-info filt and exports to guest-list.csv file
+function getUsersFromJSONFile() {
 	try {
 		let rawdata = fs.readFileSync('user-info.txt');
 		let userInfo = JSON.parse(rawdata);
@@ -21,7 +23,7 @@ function getUsers() {
 
 function _writeToFile(users) {
 	const header = "User ID,name\n";
-	let file = fs.createWriteStream('guest-list.txt');
+	let file = fs.createWriteStream('guest-list.csv');
 	file.write(header);
 
 	users.forEach(function(user) {
@@ -43,4 +45,4 @@ function _writeToFile(users) {
 
 
 // RUN:
-getUsers();
+getUsersFromJSONFile();
