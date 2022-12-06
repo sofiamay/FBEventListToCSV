@@ -44,7 +44,7 @@ function getUsers(data) {
 
 // takes a JSON list of users and outputs their info into OUTPUT_PATh csv file
 function _writeToFile(users) {
-	const header = "User ID,name\n";
+	const header = "User ID,Name\n";
 	let file = fs.createWriteStream(OUTPUT_PATH);
 	file.write(header);
 
