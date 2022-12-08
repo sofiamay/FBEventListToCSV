@@ -1,0 +1,22 @@
+{
+  "name": "fbevents-cli",
+  "version": "1.0.0",
+  "description": "Export facebook event guest list to .csv",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {  
+    "fbevents": "./index.js"  
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sofiamay/FBEventListToCSV.git"
+  },
+  "author": "Sofia May",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sofiamay/FBEventListToCSV/issues"
+  },
+  "homepage": "https://github.com/sofiamay/FBEventListToCSV#readme"
+}

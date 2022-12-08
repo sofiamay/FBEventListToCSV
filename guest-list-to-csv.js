@@ -9,7 +9,7 @@ const OUTPUT_PATH = process.env.OUTPUT_PATH || "guest-list.csv";
 // Save the facebook event page to INPUT_PATH or replace source.html with the fb event page
 // results are saved to OUTPUT_PATH or "guest-list.csv"
 // and are in the format "User Id, name"
-function getUsersFromHTML() {
+function convertToCSV() {
 	try {
 		const html = fs.readFileSync(INPUT_PATH).toString();
 		const regex = /"event_connected_users_private.+]},"event_connected_emails_going"/;
@@ -65,6 +65,8 @@ function _writeToFile(users) {
 	file.end();
 }
 
+module.exports = { convertToCSV: convertToCSV };
+
 
 // RUN:
-getUsersFromHTML();
+// getUsersFromHTML();
