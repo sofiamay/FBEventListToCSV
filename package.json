@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "bin": {  
-    "fbevents": "./index.js"  
+  "bin": {
+    "fbevents": "./index.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/sofiamay/FBEventListToCSV/issues"
   },
-  "homepage": "https://github.com/sofiamay/FBEventListToCSV#readme"
+  "homepage": "https://github.com/sofiamay/FBEventListToCSV#readme",
+  "dependencies": {
+    "yargs": "^17.6.2"
+  }
 }
