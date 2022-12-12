@@ -9,6 +9,15 @@ const fs = require('fs');
 
 function convertToCSV(inputPath = "source.html", outputPath = "guest-list.csv") {
 	try {
+		// -- ERROR CHECKING: files must be in the correct format --
+		if (!inputPath.endsWith(".html")) {
+			throw "input file must be an html source ending with '.html'";
+		}
+		if (!outputPath.endsWith(".csv")) {
+			throw "output file must ends with .csv";
+		}
+
+		// -- MAIN --
 		const html = fs.readFileSync(inputPath).toString();
 		const regex = /"event_connected_users_private.+]},"event_connected_emails_going"/;
 		const found = html.match(regex);
@@ -32,6 +41,8 @@ function convertToCSV(inputPath = "source.html", outputPath = "guest-list.csv") 
 		_writeToFile(users, outputPath);
 		console.log("Success");
 		return true;
+
+	// CATCH ERRORS
 	} catch (error) {
 		console.log(error);
 		return false;
@@ -63,6 +74,3 @@ function _writeToFile(users, outputPath) {
 
 module.exports = { convertToCSV: convertToCSV };
 
-
-// RUN:
-// getUsersFromHTML();
