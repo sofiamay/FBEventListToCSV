@@ -29,12 +29,20 @@ const args = yargs
 		    describe: "path to the .csv file",
 		    type: "string",
 		    nargs: 1,
-		  })   
+		  })
+		  .option("rm", {
+		    alias: "rm-source",
+		    describe: "delete html file after executing",
+		    type: "boolean",
+		    default: true,
+		  }) 
       .argv;
 
 // -- MAIN --
 let sourcePath = args.source ?? DEFAULTSOURCEPATH;
 let outputPath = args.output ?? DEFAULTOUTPUTPATH;
+let deleteSource = args["rm-source"] ?? false;
+
 
 // Run main funtion:
-guestList.convertToCSV(sourcePath, outputPath);
+guestList.convertToCSV(sourcePath, outputPath, deleteSource);

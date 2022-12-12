@@ -7,7 +7,7 @@ const fs = require('fs');
 // and are in the format "User Id, name"
 
 
-function convertToCSV(inputPath = "source.html", outputPath = "guest-list.csv") {
+function convertToCSV(inputPath = "source.html", outputPath = "guest-list.csv", deleteSource = false) {
 	try {
 		// -- ERROR CHECKING: files must be in the correct format --
 		if (!inputPath.endsWith(".html")) {
@@ -39,7 +39,11 @@ function convertToCSV(inputPath = "source.html", outputPath = "guest-list.csv") 
 			return false;
 		}
 		_writeToFile(users, outputPath);
-		console.log("Success");
+		if (deleteSource) {
+			fs.unlinkSync(inputPath);
+			console.log(`- ${inputPath} deleted`);
+		}
+		console.log(`Success: Guest list exported to ${outputPath}`);
 		return true;
 
 	// CATCH ERRORS

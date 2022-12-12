@@ -22,7 +22,7 @@ In terminal:
     fbevents
     - s | --source (optional): path to the .html file of the fb event page
     - o | --output (optional): path to the .csv output file
-
+    - rm | --rm-source (optional): remove .html file after execution. Defaults to false.
 
 Results are of the format:
 
