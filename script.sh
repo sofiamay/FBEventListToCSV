@@ -1,6 +1,8 @@
 #!/bin/sh
 
 # Required Node version: 16+
+# Intall directory
+TARGET=/usr/local/bin 
 
 # Get machine: mac vs linux
 machine=0
@@ -47,5 +49,8 @@ else
   sleep 5
 fi
 # Install dependencies and run
+sudo mkdir -p $TARGET
+pushd $TARGET
 npm install
 npm install -g
+popd
