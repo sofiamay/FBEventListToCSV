@@ -9,8 +9,9 @@ const DEFAULTOUTPUTPATH = "guest-list.csv";
 
 // -- DEFINE CLI TOOL --
 
-const usage = "\nUsage: 'fbevents -s source-path-string -o output-path-string' to convert a guest list to .csv file";
-const args = yargs
+const usage = `\nUsage: 'fbevents myeventpage.html -o output-path-string' to convert a guest list to .csv file.
+	The input file is a requird argument, unless replaced with the -s flag`;
+const fbevents = yargs
 			.scriptName("fbevents") 
       .usage(usage)
       .example(
@@ -20,7 +21,7 @@ const args = yargs
       .help(true)
       .option("s", {
 		    alias: "source",
-		    describe: "the source html file that corresponds to the fb event page",
+		    describe: "use the default path of 'source.html' for the input file",
 		    type: "string",
 		    nargs: 1,
 		  })
@@ -39,9 +40,12 @@ const args = yargs
       .argv;
 
 // -- MAIN --
-let sourcePath = args.source ?? DEFAULTSOURCEPATH;
-let outputPath = args.output ?? DEFAULTOUTPUTPATH;
-let deleteSource = args["rm-source"] ?? false;
+let args = fbevents._;
+if ((args.length >= 2) || (fbevents.source && args.length > 0)) throw `Incorrect number of arguments`;
+// only arg should be input file
+let sourcePath = args[0] ?? DEFAULTSOURCEPATH;
+let outputPath = fbevents.output ?? DEFAULTOUTPUTPATH;
+let deleteSource = fbevents["rm-source"] ?? false;
 
 
 // Run main funtion:

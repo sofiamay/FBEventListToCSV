@@ -3,7 +3,7 @@
 The Facebook Graph API gives access to data for group/page/public events but not private user created events. So I made this simple script to pull data from the html page and output the "Going" list to a .csv file.
 
 Example:
-`fbevents -o new-guest-list.csv`
+`fbevents my-event-page.html -o new-guest-list.csv`
 
 ## Requirements
 
@@ -19,8 +19,8 @@ In a browser navigate to the fb event. Save the source to an html file.
 
 In terminal:
 
-    fbevents
-    - s | --source (optional): path to the .html file of the fb event page. Defaults to 'source.html'.
+    fbevents <htmlfile>
+    - s | --source (optional): Use 'source.html' as import file and omit <htmlfile>.
     - o | --output (optional): path to the .csv output file
     - rm | --rm-source (optional): remove .html file after execution. Defaults to false.
 

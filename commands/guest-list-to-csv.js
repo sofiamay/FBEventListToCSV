@@ -1,11 +1,13 @@
 'use strict';
 const fs = require('fs');
 
-// Extracts users attending a facebook event and exports them to a CSV file. 
-// Save the facebook event page to INPUT_PATH or replace source.html with the fb event page
-// results are saved to OUTPUT_PATH or "guest-list.csv"
-// and are in the format "User Id, name"
-
+/*
+Extracts users attending a facebook event and exports them to a CSV file. 
+Save the facebook event page to INPUT_PATH or replace source.html with the fb event page
+results are saved to OUTPUT_PATH or "guest-list.csv"
+and are in the format "User Id, name"
+Returns bool: true on success, false on failure
+*/
 
 function convertToCSV(inputPath = "source.html", outputPath = "guest-list.csv", deleteSource = false) {
 	try {
