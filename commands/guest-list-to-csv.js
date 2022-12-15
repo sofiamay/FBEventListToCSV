@@ -104,11 +104,15 @@ class Fields {
 	  }
   }
 
-  remove(field) {
-  	const index = this._ordered.indexOf(field);
+  remove(key) {
+  	if (!this._fields[key]) {
+  		console.log(`Key: ${key} not found in fields. Nothing to remove`);
+  		return null;
+  	}
+  	const index = this._ordered.indexOf(key);
 		if (index > -1) { // only splice array when item is found
 		  this._ordered.splice(index, 1);
-		  delete this._fields[field];
+		  delete this._fields[key];
 		}
   }
 
