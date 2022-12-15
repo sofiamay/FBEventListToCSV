@@ -6,6 +6,12 @@ const guestList = require('./commands/guest-list-to-csv.js');
 //-- CONSTANTS --
 const DEFAULTSOURCEPATH = "source.html";
 const DEFAULTOUTPUTPATH = "guest-list.csv";
+// fields take the form [jsonKey: csv label]
+const DEFAULTFIELDS = [
+	["id", "User ID"],
+	["name", "Name"],
+];
+const PHOTOFIELD = ["profile_picture", "Profile Picture"];
 
 // -- DEFINE CLI TOOL --
 
@@ -31,12 +37,18 @@ const fbevents = yargs
 		    type: "string",
 		    nargs: 1,
 		  })
-		  .option("rm", {
+		  .option("r", {
 		    alias: "rm-source",
 		    describe: "delete html file after executing",
 		    type: "boolean",
-		    default: true,
-		  }) 
+		    nargs: 0,
+		  })
+		  .option("p", {
+		    alias: "include-photo",
+		    describe: "include profile photo",
+		    type: "boolean",
+		    nargs: 0,
+		  })  
       .argv;
 
 // -- MAIN --
@@ -45,8 +57,11 @@ if ((args.length >= 2) || (fbevents.source && args.length > 0)) throw `Incorrect
 // only arg should be input file
 let sourcePath = args[0] ?? DEFAULTSOURCEPATH;
 let outputPath = fbevents.output ?? DEFAULTOUTPUTPATH;
-let deleteSource = fbevents["rm-source"] ?? false;
+let deleteSource = fbevents.rmSource ?? false;
+let includePhoto = fbevents.includePhoto ?? false;
+let fields = DEFAULTFIELDS;
+if (fbevents.includePhoto) fields.push(PHOTOFIELD);
 
 
 // Run main funtion:
-guestList.convertToCSV(sourcePath, outputPath, deleteSource);
+guestList.convertToCSV(sourcePath, outputPath, deleteSource, fields);

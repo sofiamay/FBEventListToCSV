@@ -22,12 +22,15 @@ In terminal:
     fbevents <htmlfile>
     - s | --source (optional): Use 'source.html' as import file and omit <htmlfile>.
     - o | --output (optional): path to the .csv output file
-    - rm | --rm-source (optional): remove .html file after execution. Defaults to false.
+    - r | --rm-source (optional): remove .html file after execution. Defaults to false.
+    - p | --photo (optional): Add a link to guest profile as a field in the csv file.
 
 Results are of the format:
 
-| User ID | Name |  
+| User ID | Name | (Profile Photo) | 
 | ----------- | ----------- |  
-| 987234812 | A Person |  
-| 263524184637 | Another Person |
+| 987234812 | A Person | https://a-link-to-a-photo.jpg | 
+| 263524184637 | Another Person | https://a-link-to-another-photo.jpg |
+
+Profile photo is an optional field provided by the -p flag
 
