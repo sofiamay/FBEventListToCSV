@@ -28,9 +28,10 @@ In terminal:
 Results are of the format:
 
 | User ID | Name | (Profile Photo) | 
-| ----------- | ----------- |  
+| ----------- | ----------- | ----------- |
 | 987234812 | A Person | https://a-link-to-a-photo.jpg | 
 | 263524184637 | Another Person | https://a-link-to-another-photo.jpg |
+
 
 Profile photo is an optional field provided by the -p flag
 
