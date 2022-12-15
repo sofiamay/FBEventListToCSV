@@ -76,9 +76,9 @@ class Field {
 
 // add Field to Fields with Fields.append(Field) in the order they should appear
 class Fields {
-  constructor(height, width) {
+  constructor() {
     this._ordered = [];
-    this._fields = {}; //eg. "name": "User Name"
+    this._fields = {}; //eg. { "name": <Field>{key: "name", label: "Name"} }
   }
 
   //accepts array of arrays, returns new Fields object. E.g. [["id", "User ID],["name," "Name"]]
@@ -96,8 +96,12 @@ class Fields {
 
   push(field) {
   	if (! (field instanceof Field)) throw `Fields.push only accepts Field objects`;
-  	this._ordered.push(field);
-  	this._fields[field.key] = field.label;
+  	if (!this._fields[field.key]) {
+	  	this._ordered.push(field);
+	  	this._fields[field.key] = field;
+	  } else {
+	  	console.log(`Cannot add field to Fields. Field with key ${field.key} already in Fields`);
+	  }
   }
 
   remove(field) {
@@ -111,6 +115,19 @@ class Fields {
   containsKey(key) {
   	if (!this._fields[key]) return false;
   	return true;
+  }
+
+  getField(key) {
+  	return this._fields[key];
+  }
+
+  getLabelof(key) {
+  	if (! this._fields[key]) {
+  		console.log(`field with key ${key} doesn't exist in Fields`);
+  		return null;
+  	}
+  	let field = this._fields[key];
+  	return field.label;
   }
 
   length() {
