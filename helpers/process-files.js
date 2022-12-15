@@ -27,7 +27,12 @@ function readFileAsString(inputPath) {
 	return fs.readFileSync(inputPath).toString();
 }
 
+function deleteFile(inputPath) {
+	return fs.unlinkSync(inputPath);
+}
+
 module.exports = {
 	writeToFile: writeToFile,
 	readFileAsString: readFileAsString,
+	deleteFile: deleteFile,
 };

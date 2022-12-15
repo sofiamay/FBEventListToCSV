@@ -176,7 +176,6 @@ function convertToCSV(inputPath = "source.html", outputPath = "guest-list.csv", 
 
 		// Convert data to JSON object 
 		let userJSON= JSON.parse(data);
-		// let users = userInfo.event_connected_users_private.nodes;
 		let users = new Users();
 		userJSON.event_connected_users_private.nodes.forEach((userInfo) => {
 			let user = new User(userInfo);
@@ -189,9 +188,8 @@ function convertToCSV(inputPath = "source.html", outputPath = "guest-list.csv", 
 		let fields = Fields.fromArray(fieldList);
 		let usersData = users.toList();
 		processFiles.writeToFile(usersData, outputPath, fields);
-		// _writeToFile(usersData, outputPath, fields);
 		if (deleteSource) {
-			fs.unlinkSync(inputPath);
+			processFiles.deleteFile(inputPath);
 			console.log(`- ${inputPath} deleted`);
 		}
 		console.log(`Success: Guest list exported to ${outputPath}`);
