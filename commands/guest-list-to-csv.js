@@ -55,15 +55,14 @@ async function convertToCSV(inputPath = "source.html", outputPath = "guest-list.
 		}
 		let fields = Fields.fromArray(fieldList);
 		let usersData = users.toList();
-		processFiles.writeToFile(usersData, outputPath, fields).then((resultFile) => {
-			conosle.log("creating file");
-			if (deleteSource) {
-				processFiles.deleteFile(inputPath);
-				console.log(`- ${inputPath} deleted`);
-			}
-			console.log(`Success: Guest list exported to ${outputPath}`);
-			return true;
-		});
+		console.log("Creating file...");
+		await processFiles.writeToFile(usersData, outputPath, fields);
+		if (deleteSource) {
+			processFiles.deleteFile(inputPath);
+			console.log(`- ${inputPath} deleted`);
+		}
+		console.log(`Success: Guest list exported to ${outputPath}`);
+		return outputPath;
 
 	// CATCH ERRORS
 	} catch (error) {

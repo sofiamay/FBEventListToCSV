@@ -8,7 +8,7 @@ attributes:
 - JSONOBJ {
 	"id": id,
 	"name": name,
-	"profile_picture": profilePicture,
+	"profile_picture": "uri": "https://url-to-photo.jpg",
 }
 */
 
@@ -17,7 +17,12 @@ class User {
 	constructor(jsonObj) {
 		this.id = jsonObj.id || null;
 		this.name = jsonObj.name || null;
-		this.profilePicture = jsonObj.profile_picture.uri || null;
+		if (jsonObj.profile_picture) {
+			this.profilePicture = jsonObj.profile_picture.uri || null;
+		}
+		else {
+			this.profilePicture = null;
+		}
 		this.JSONObj = {
 			"id": this.id,
 			"name": this.name,
@@ -26,11 +31,14 @@ class User {
 	}
 }
 
+// [User, User, ...] --> new Users
 class Users {
 	constructor(users) {
 		let self = this;
 		this.users = users || [];
-
+		this.users.forEach((person)=>{
+			if (! person instanceof User) throw `Type Error: Users accept array of User`;
+		});
 		// access users[index]
 		return new Proxy(this, {
       get(target, prop) {
@@ -43,7 +51,7 @@ class Users {
 	}
 
 	// [{name: "John", id: "12345"}, {...}, ...]--> new Users
-	static fromList(usersInfo) {
+	static fromArray(usersInfo) {
 		let userList = [];
 		usersInfo.forEach((userInfo) => {
 			let user = new User(userInfo);

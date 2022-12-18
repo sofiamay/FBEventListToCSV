@@ -43,14 +43,55 @@ class Fields {
   	return fields;
   }
 
+  get length() {
+    return this._ordered.length;
+  }
+
+
   push(field) {
-  	if (! (field instanceof Field)) throw `Fields.push only accepts Field objects`;
-  	if (!this._fields[field.key]) {
-	  	this._ordered.push(field);
-	  	this._fields[field.key] = field;
-	  } else {
-	  	console.log(`Cannot add field to Fields. Field with key ${field.key} already in Fields`);
-	  }
+    if (! (field instanceof Field)) throw `Fields.push only accepts Field objects`;
+    if (!this._fields[field.key]) {
+      this._ordered.push(field);
+      this._fields[field.key] = field;
+    } else {
+      console.log(`Cannot add field to Fields. Field with key ${field.key} already in Fields`);
+    }
+  }
+
+  containsKey(key) {
+    if (!this._fields[key]) return false;
+    return true;
+  }
+
+  getField(key) {
+    return this._fields[key];
+  }
+
+  getLabelof(key) {
+    if (! this._fields[key]) {
+      console.log(`field with key ${key} doesn't exist in Fields`);
+      return null;
+    }
+    let field = this._fields[key];
+    return field.label;
+  }
+
+  // returns list of labels
+  orderedLabels() {
+    let labels = [];
+    this._ordered.forEach((field, index) => {
+      labels.push(field.label);
+    });
+    return labels;
+  }
+
+  // returns list of keys
+  orderedKeys() {
+    let keys = [];
+    this._ordered.forEach((field, index) => {
+      keys.push(field.key);
+    });
+    return keys;
   }
 
   remove(key) {
@@ -58,51 +99,11 @@ class Fields {
   		console.log(`Key: ${key} not found in fields. Nothing to remove`);
   		return null;
   	}
-  	const index = this._ordered.indexOf(key);
+  	const index = this.orderedKeys().indexOf(key);
 		if (index > -1) { // only splice array when item is found
 		  this._ordered.splice(index, 1);
 		  delete this._fields[key];
 		}
-  }
-
-  containsKey(key) {
-  	if (!this._fields[key]) return false;
-  	return true;
-  }
-
-  getField(key) {
-  	return this._fields[key];
-  }
-
-  getLabelof(key) {
-  	if (! this._fields[key]) {
-  		console.log(`field with key ${key} doesn't exist in Fields`);
-  		return null;
-  	}
-  	let field = this._fields[key];
-  	return field.label;
-  }
-
-  length() {
-  	return this._ordered.length();
-  }
-
-  // returns list of labels
-  orderedLabels() {
-  	let labels = [];
-  	this._ordered.forEach((field, index) => {
-  		labels.push(field.label);
-  	});
-  	return labels;
-  }
-
-  // returns list of keys
-  orderedKeys() {
-  	let keys = [];
-  	this._ordered.forEach((field, index) => {
-  		keys.push(field.key);
-  	});
-  	return keys;
   }
 }
 

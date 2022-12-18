@@ -3,7 +3,7 @@ const fs = require('fs');
 const Field = require('../models/fields').Field, Fields = require('../models/fields').Fields;
 
 // --- takes a list of JSON Objs and outputs their info matching fields into OUTPUT_PATH csv file ---
-// (object, string, Fields) --> void
+// ([object], string, Fields) --> void
 function _writeToStream(JSONObj, outputPath, fields) {
 	// ERROR CHECKING FOR TYPE:
 	if (! fields instanceof Fields) {
@@ -33,7 +33,7 @@ function _writeToStream(JSONObj, outputPath, fields) {
 	return file;
 }
 
-// e.g. writeToFileAsync(JSONObj, outputPath, fields).then( (resultFile) => {doSomething();})
+// e.g. writeToFileAsync([JSONObj], outputPath, fields).then( (resultFile) => {doSomething();})
 function writeToFile(JSONObj, outputPath, fields) {
 	return new Promise((resolve, reject) => {
 		let file = _writeToStream(JSONObj, outputPath, fields);
