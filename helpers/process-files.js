@@ -1,7 +1,15 @@
 const fs = require('fs');
+// Data Models
+const Field = require('../models/fields').Field, Fields = require('../models/fields').Fields;
 
-// takes a list of JSON Objs and outputs their info matching fields into OUTPUT_PATh csv file
+// --- takes a list of JSON Objs and outputs their info matching fields into OUTPUT_PATH csv file ---
+// (object, string, Fields) --> void
 function writeToFile(JSONObj, outputPath, fields) {
+	// ERROR CHECKING FOR TYPE:
+	if (! fields instanceof Fields) {
+		throw `Type Error: writeToFile 3rd argument must be of type Field`;
+	};
+	// MAIN:
 	let header = fields.orderedLabels().toString() + "\n";
 
 	let file = fs.createWriteStream(outputPath);
@@ -23,10 +31,12 @@ function writeToFile(JSONObj, outputPath, fields) {
 	file.end();
 }
 
+// (string) --> string
 function readFileAsString(inputPath) {
 	return fs.readFileSync(inputPath).toString();
 }
 
+// (string) --> string
 function deleteFile(inputPath) {
 	return fs.unlinkSync(inputPath);
 }

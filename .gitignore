@@ -1,6 +1,7 @@
 # Input and output files
 source.html
 guest-list.csv
+*.csv
 
 # Logs
 logs
