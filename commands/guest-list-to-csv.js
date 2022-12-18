@@ -55,7 +55,6 @@ async function convertToCSV(inputPath = "source.html", outputPath = "guest-list.
 		}
 		let fields = Fields.fromArray(fieldList);
 		let usersData = users.toList();
-		// processFiles.writeToFile(usersData, outputPath, fields);
 		processFiles.writeToFile(usersData, outputPath, fields).then((resultFile) => {
 			conosle.log("creating file");
 			if (deleteSource) {
