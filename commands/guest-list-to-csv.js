@@ -12,7 +12,7 @@ and are in the format "User Id, name"
 Returns bool: true on success, false on failure
 */
 
-function convertToCSV(inputPath = "source.html", outputPath = "guest-list.csv", deleteSource = false, fieldList = []) {
+async function convertToCSV(inputPath = "source.html", outputPath = "guest-list.csv", deleteSource = false, fieldList = []) {
 	try {
 		// -- ERROR CHECKING: --
 		// 1)  files must be in correct format
@@ -55,13 +55,16 @@ function convertToCSV(inputPath = "source.html", outputPath = "guest-list.csv", 
 		}
 		let fields = Fields.fromArray(fieldList);
 		let usersData = users.toList();
-		processFiles.writeToFile(usersData, outputPath, fields);
-		if (deleteSource) {
-			processFiles.deleteFile(inputPath);
-			console.log(`- ${inputPath} deleted`);
-		}
-		console.log(`Success: Guest list exported to ${outputPath}`);
-		return true;
+		// processFiles.writeToFile(usersData, outputPath, fields);
+		processFiles.writeToFile(usersData, outputPath, fields).then((resultFile) => {
+			conosle.log("creating file");
+			if (deleteSource) {
+				processFiles.deleteFile(inputPath);
+				console.log(`- ${inputPath} deleted`);
+			}
+			console.log(`Success: Guest list exported to ${outputPath}`);
+			return true;
+		});
 
 	// CATCH ERRORS
 	} catch (error) {

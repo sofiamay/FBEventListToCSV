@@ -4,7 +4,7 @@
   "description": "Export facebook event guest list to .csv",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "bin": {
     "fbevents": "./index.js"
@@ -21,5 +21,10 @@
   "homepage": "https://github.com/sofiamay/FBEventListToCSV#readme",
   "dependencies": {
     "yargs": "^17.6.2"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "chai-files": "^1.4.0",
+    "mocha": "^10.2.0"
   }
 }
